@@ -16,8 +16,8 @@ class Home extends Component {
 
         this.openDrawer = this.openDrawer.bind(this);
         this.closeDrawer = this.closeDrawer.bind(this);
-        this.changeScreen = this.changeScreen.bind(this);
     }
+
 
     openDrawer() {
         this.drawerLayoutAndroid.openDrawer();
@@ -25,13 +25,6 @@ class Home extends Component {
 
     closeDrawer() {
         this.drawerLayoutAndroid.closeDrawer();
-    }
-
-    changeScreen(name) {
-        this.closeDrawer();
-        this.props.navigator.push({
-            name
-        });
     }
 
     render() {
@@ -43,8 +36,7 @@ class Home extends Component {
                 renderNavigationView={() => (
                     <DrawerContent
                         user={this.props.user}
-                        closeDrawer={this.closeDrawer}
-                        changeScreen={this.changeScreen} />
+                        closeDrawer={this.closeDrawer} />
                 )}>
 
                 <Icon.ToolbarAndroid
