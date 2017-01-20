@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     profileName: {
         fontSize: 15,
         fontWeight: "500",
-        color: "#757575",
+        color: "#424242",
         paddingLeft: 14
     },
     cardInfoContainer: {

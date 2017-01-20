@@ -3,7 +3,7 @@
 try {
     var path = require("path");
     var Launcher = require("C:\\Users\\scotty-rogers\\.vscode\\extensions\\vsmobile.vscode-react-native-0.2.5\\out\\debugger\\launcher.js").Launcher;
-    new Launcher("c:\\Users\\scotty-rogers\\Desktop\\MyCardCollector", "c:\\Users\\scotty-rogers\\Desktop\\MyCardCollector").launch();
+    new Launcher("c:\\Users\\scotty-rogers\\Documents\\GitHub\\my-card-collector-react-native", "c:\\Users\\scotty-rogers\\Documents\\GitHub\\my-card-collector-react-native").launch();
 } catch (e) {
     throw new Error("Unable to launch application. Try deleting .vscode/launchReactNative.js and restarting vscode.");
 }
