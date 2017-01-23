@@ -1,9 +1,13 @@
-import React, { Component } from "react";
-import { View, Text, ListView, DrawerLayoutAndroid, ToolbarAndroid, StyleSheet, InteractionManager } from "react-native";
+import React, { Component, } from "react";
+import { View, ListView, DrawerLayoutAndroid, ToolbarAndroid, StyleSheet, InteractionManager, } from "react-native";
+import { connect, } from "react-redux";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import ActionButton from "react-native-action-button";
+import { pushScreen, } from "../actions";
 import DrawerContent from "../components/home/DrawerContent";
 import CardFeed from "../components/home/CardFeed";
-import { cards } from "../MockApi";
+import FloatingActionButton from "../components/core/FloatingActionButton";
+import { cards, } from "../MockApi";
 
 class Home extends Component {
     constructor(props) {
@@ -18,11 +22,11 @@ class Home extends Component {
         this._closeDrawer = this._closeDrawer.bind(this);
         this._pushToScreen = this._pushToScreen.bind(this);
 
-        this.drawerCloseHandle = null;
+        this.drawerHandle = null;
     }
 
-
     _openDrawer() {
+        this.drawerHandle = InteractionManager.createInteractionHandle();
         this.drawerLayoutAndroid.openDrawer();
     }
 
@@ -31,42 +35,43 @@ class Home extends Component {
     }
 
     _pushToScreen(screen) {
-        this.drawerCloseHandle = InteractionManager.createInteractionHandle();
         this._closeDrawer();
 
         InteractionManager.runAfterInteractions(() => {
-            this.props.pushToScreen(screen);
+            this.props.pushScreen(screen);
         });
     }
 
     render() {
         return (
-            <DrawerLayoutAndroid
-                ref={(drawerLayoutAndroid) => { this.drawerLayoutAndroid = drawerLayoutAndroid } }
-                drawerWidth={300}
-                drawerPosition={DrawerLayoutAndroid.positions.Left}
-                onDrawerClose={() => InteractionManager.clearInteractionHandle(this.drawerCloseHandle)}
-                renderNavigationView={() => (
-                    <DrawerContent
-                        user={this.props.user}
-                        closeDrawer={this._closeDrawer}
-                        pushToScreen={this._pushToScreen} />
-                )}>
+            <View style={{flex: 1}}>
+                <DrawerLayoutAndroid
+                    ref={(drawerLayoutAndroid) => { this.drawerLayoutAndroid = drawerLayoutAndroid } }
+                    drawerWidth={300}
+                    drawerPosition={DrawerLayoutAndroid.positions.Left}
+                    onDrawerClose={() => InteractionManager.clearInteractionHandle(this.drawerHandle)}
+                    renderNavigationView={() => (
+                        <DrawerContent
+                            user={this.props.user}
+                            closeDrawer={this._closeDrawer}
+                            pushToScreen={this._pushToScreen} />
+                    )}>
 
-                <Icon.ToolbarAndroid
-                    style={styles.toolbar}
-                    title="Home"
-                    titleColor="#fff"
-                    navIconName="menu"
-                    elevation={5}
-                    onIconClicked={this._openDrawer}
-                    />
+                    <Icon.ToolbarAndroid
+                        style={styles.toolbar}
+                        title="Home"
+                        titleColor="#fff"
+                        navIconName="menu"
+                        elevation={5}
+                        onIconClicked={this._openDrawer}
+                        />
 
-                <CardFeed dataSource={this.state.dataSource} user={this.props.user} />
+                    <CardFeed dataSource={this.state.dataSource} user={this.props.user} />
 
-            </DrawerLayoutAndroid>
+                    <FloatingActionButton onPress={() => this.props.pushScreen({key: "add-card"})} />
 
-
+                </DrawerLayoutAndroid>
+            </View>
         );
     }
 }
@@ -78,4 +83,14 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Home;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+    };
+};
+
+const mapDispatchToProps = {
+    pushScreen,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

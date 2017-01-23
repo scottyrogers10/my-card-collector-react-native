@@ -4,7 +4,7 @@ import { connect, } from "react-redux";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { popScreen, } from "../actions";
 
-class MyAlbums extends Component {
+class AddCard extends Component {
     constructor(props) {
         super(props);
 
@@ -20,7 +20,7 @@ class MyAlbums extends Component {
             <View style={{ flex: 1 }}>
                 <Icon.ToolbarAndroid
                     style={styles.toolbar}
-                    title="My Albums"
+                    title="Add Card"
                     titleColor="#424242"
                     navIconName="arrow-back"
                     elevation={5}
@@ -49,4 +49,4 @@ const mapDispatchToProps = {
     popScreen
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyAlbums);
+export default connect(mapStateToProps, mapDispatchToProps)(AddCard);

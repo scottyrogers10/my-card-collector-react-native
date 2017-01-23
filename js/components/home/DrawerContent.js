@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     },
     routeIcon: {
         width: 40,
-        color: "#6f7993"
+        color: "#767d8e"
     },
     routeLabel: {
         paddingLeft: 8,

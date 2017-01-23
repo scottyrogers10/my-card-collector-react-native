@@ -16,7 +16,7 @@ class Settings extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{ flex: 1 }}>
                 <Icon.ToolbarAndroid
                     style={styles.toolbar}
                     title="Settings"

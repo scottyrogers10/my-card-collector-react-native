@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         fontSize: 17
     },
     playerName: {
-        color: "#757575",
+        color: "#767d8e",
         fontWeight: "500",
         fontSize: 13
     }

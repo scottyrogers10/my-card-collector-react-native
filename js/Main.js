@@ -1,73 +1,112 @@
-import React, { Component } from "react";
-import { NavigationExperimental } from "react-native";
-import { connect } from "react-redux";
-import { user } from "./MockApi";
-import { getUser, pushScreen } from "./actions";
+import React, { Component, } from "react";
+import { View, NavigationExperimental, Easing, StyleSheet, Animated, } from "react-native";
+import { connect, } from "react-redux";
+import { user, } from "./MockApi";
+import { getUser, } from "./actions";
 import Home from "./screens/Home";
 import Profile from "./screens/Profile";
 import MyAlbums from "./screens/MyAlbums";
 import Settings from "./screens/Settings";
+import AddCard from "./screens/AddCard";
 
-const { CardStack: NavigationCardStack } = NavigationExperimental;
+const { Transitioner: NavigationTransitioner, } = NavigationExperimental;
+
+const screenContainers = {
+    "home": Home,
+    "profile": Profile,
+    "my-albums": MyAlbums,
+    "settings": Settings,
+    "add-card": AddCard
+};
 
 class Main extends Component {
     constructor(props) {
         super(props);
-
-        this._renderScreen = this._renderScreen.bind(this);
-        this._pushToScreen = this._pushToScreen.bind(this);
     }
 
     componentWillMount() {
         this.props.getUser(0);
     }
 
-    _pushToScreen(screen) {
-        this.props.pushScreen(screen);
+    _render(transitionProps) {
+        const screens = transitionProps.scenes;
+        return screens.map((screen) => {
+            const screenProps = {
+                ...transitionProps,
+                screen,
+            };
+            return this._renderScreen(screenProps);
+        });
     }
 
     _renderScreen(screenProps) {
-        //TODO: Throw these into a map
-        const screen = screenProps.scene;
-        
-        if (screen.route.key === "home") {
-            return <Home user={this.props.user} pushToScreen={this._pushToScreen} />
-        }
+        const screen = screenProps.screen;
+        const Screen = screenContainers[screen.route.key];
 
-        if (screen.route.key === "profile") {
-            return <Profile />
-        }
+        return (
+            <Animated.View key={screen.route.key} style={[styles.screen, this._getAnimatedStyle(screenProps)]}>
+                <Screen />
+            </Animated.View>
+        );
+    }
 
-        if (screen.route.key === "my-albums") {
-            return <MyAlbums />
-        }
+    _getAnimatedStyle(screenProps) {
+        const { layout, position, screen, } = screenProps;
+        const { index, } = screen;
 
-        if (screen.route.key === "settings") {
-            return <Settings />
-        }
+        const inputRange = [index - 1, index, index + 1];
+        const width = layout.initWidth;
+        const translateX = position.interpolate({
+            inputRange,
+            outputRange: ([width, 0, -10]),
+        });
+
+        return {
+            transform: [
+                { translateX },
+            ],
+        };
+    }
+
+    _configureTransition() {
+        const easing = Easing.inOut(Easing.ease);
+        return {
+            duration: 300,
+            easing,
+        };
     }
 
     render() {
         return (
-            <NavigationCardStack
-                direction="horizontal"
+            <NavigationTransitioner
                 navigationState={this.props.navigator}
-                renderScene={this._renderScreen}
+                render={(transitionProps) => this._render(transitionProps)}
+                configureTransition={this._configureTransition}
                 />
         );
     }
 }
 
+const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+        position: "absolute",
+        backgroundColor: "#f2f2f2",
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+    },
+});
+
 const mapStateToProps = (state) => {
     return {
-        user: state.user,
-        navigator: state.navigator
+        navigator: state.navigator,
     };
 };
 
 const mapDispatchToProps = {
     getUser,
-    pushScreen
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

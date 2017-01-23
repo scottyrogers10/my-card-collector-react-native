@@ -8,7 +8,7 @@ const initialState = {
     ]
 };
 
-export default function user(state = initialState, action) {
+export default function navigator(state = initialState, action) {
     if (action.type === ActionTypes.PUSH_SCREEN) {
         if (state.routes[state.index].key === (action.payload.screen.key)) return state;
         return NavigationStateUtils.push(state, action.payload.screen);
