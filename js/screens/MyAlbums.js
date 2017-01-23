@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { popScreen } from "../actions";
 
 class MyAlbums extends Component {
     constructor(props) {
@@ -9,7 +11,7 @@ class MyAlbums extends Component {
     }
 
     backButtonPress() {
-        this.props.navigator.pop();
+        this.props.popScreen();
     }
 
     render() {
@@ -35,4 +37,15 @@ const styles = StyleSheet.create({
     }
 });
 
-export default MyAlbums;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+        navigator: state.navigator
+    };
+};
+
+const mapDispatchToProps = {
+    popScreen
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyAlbums);

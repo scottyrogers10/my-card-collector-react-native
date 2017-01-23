@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, ListView, DrawerLayoutAndroid, ToolbarAndroid, StyleSheet } from "react-native";
+import { View, Text, ListView, DrawerLayoutAndroid, ToolbarAndroid, StyleSheet, InteractionManager } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import DrawerContent from "../components/home/DrawerContent";
 import CardFeed from "../components/home/CardFeed";
@@ -14,17 +14,29 @@ class Home extends Component {
             dataSource: ds.cloneWithRows(cards)
         };
 
-        this.openDrawer = this.openDrawer.bind(this);
-        this.closeDrawer = this.closeDrawer.bind(this);
+        this._openDrawer = this._openDrawer.bind(this);
+        this._closeDrawer = this._closeDrawer.bind(this);
+        this._pushToScreen = this._pushToScreen.bind(this);
+
+        this.drawerCloseHandle = null;
     }
 
 
-    openDrawer() {
+    _openDrawer() {
         this.drawerLayoutAndroid.openDrawer();
     }
 
-    closeDrawer() {
+    _closeDrawer() {
         this.drawerLayoutAndroid.closeDrawer();
+    }
+
+    _pushToScreen(screen) {
+        this.drawerCloseHandle = InteractionManager.createInteractionHandle();
+        this._closeDrawer();
+
+        InteractionManager.runAfterInteractions(() => {
+            this.props.pushToScreen(screen);
+        });
     }
 
     render() {
@@ -33,10 +45,12 @@ class Home extends Component {
                 ref={(drawerLayoutAndroid) => { this.drawerLayoutAndroid = drawerLayoutAndroid } }
                 drawerWidth={300}
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
+                onDrawerClose={() => InteractionManager.clearInteractionHandle(this.drawerCloseHandle)}
                 renderNavigationView={() => (
                     <DrawerContent
                         user={this.props.user}
-                        closeDrawer={this.closeDrawer} />
+                        closeDrawer={this._closeDrawer}
+                        pushToScreen={this._pushToScreen} />
                 )}>
 
                 <Icon.ToolbarAndroid
@@ -45,7 +59,7 @@ class Home extends Component {
                     titleColor="#fff"
                     navIconName="menu"
                     elevation={5}
-                    onIconClicked={this.openDrawer}
+                    onIconClicked={this._openDrawer}
                     />
 
                 <CardFeed dataSource={this.state.dataSource} user={this.props.user} />

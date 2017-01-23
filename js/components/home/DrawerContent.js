@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, TouchableNativeFeedback } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const DrawerContent = ({ user, closeDrawer }) => {
+const DrawerContent = ({ user, closeDrawer, pushToScreen }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -18,7 +18,7 @@ const DrawerContent = ({ user, closeDrawer }) => {
                 </TouchableOpacity >
             </View>
 
-            <TouchableNativeFeedback onPress={() => undefined}>
+            <TouchableNativeFeedback onPress={() => pushToScreen({key: "profile"})}>
                     <View style={styles.route}>
                         <Icon
                             style={styles.routeIcon}
@@ -29,7 +29,7 @@ const DrawerContent = ({ user, closeDrawer }) => {
                 </TouchableNativeFeedback>
 
             <View style={styles.routesContainer}>
-                <TouchableNativeFeedback onPress={() => undefined}>
+                <TouchableNativeFeedback onPress={() => pushToScreen({key: "my-albums"})}>
                     <View style={styles.route}>
                         <Icon
                             style={styles.routeIcon}
@@ -39,7 +39,7 @@ const DrawerContent = ({ user, closeDrawer }) => {
                     </View>
                 </TouchableNativeFeedback>
 
-                <TouchableNativeFeedback onPress={() => undefined}>
+                <TouchableNativeFeedback onPress={() => pushToScreen({key: "settings"})}>
                     <View style={styles.route}>
                         <Icon
                             style={styles.routeIcon}

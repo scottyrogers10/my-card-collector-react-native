@@ -1,10 +1,13 @@
-export const user = {
-    username: "ScottyRogers10",
-    email: "scotty.rogers10@gmail.com",
-    firstName: "Scotty",
-    lastName: "Rogers",
-    profileImage: require("./assets/mock/profile.jpg")
-};
+export const users = [
+    {
+        id: 0,
+        username: "ScottyRogers10",
+        email: "scotty.rogers10@gmail.com",
+        firstName: "Scotty",
+        lastName: "Rogers",
+        profileImage: require("./assets/mock/profile.jpg")
+    }
+];
 
 export const cards = [
     {
