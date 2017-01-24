@@ -68,7 +68,7 @@ class Home extends Component {
 
                     <CardFeed dataSource={this.state.dataSource} user={this.props.user} />
 
-                    <FloatingActionButton onPress={() => this.props.pushScreen({key: "add-card"})} />
+                    <FloatingActionButton bgColor="#d23f31" iconName="add" onPress={() => this.props.pushScreen({key: "add-card"})} />
 
                 </DrawerLayoutAndroid>
             </View>

@@ -8,6 +8,7 @@ import Profile from "./screens/Profile";
 import MyAlbums from "./screens/MyAlbums";
 import Settings from "./screens/Settings";
 import AddCard from "./screens/AddCard";
+import Camera from "./screens/Camera";
 
 const { Transitioner: NavigationTransitioner, } = NavigationExperimental;
 
@@ -16,7 +17,8 @@ const screenContainers = {
     "profile": Profile,
     "my-albums": MyAlbums,
     "settings": Settings,
-    "add-card": AddCard
+    "add-card": AddCard,
+    "camera": Camera
 };
 
 class Main extends Component {

@@ -1,5 +1,5 @@
 import React, { Component, } from "react";
-import { View, StyleSheet, TouchableNativeFeedback, } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback, } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 class FloatingActionButton extends Component {
@@ -9,11 +9,11 @@ class FloatingActionButton extends Component {
 
     render() {
         return (
-            <TouchableNativeFeedback onPress={this.props.onPress}>
-                <View style={styles.container} elevation={5}>
-                    <Icon name="add" color="#fff" size={25} style={styles.icon} />
+            <TouchableWithoutFeedback onPress={this.props.onPress}>
+                <View style={[styles.container, {backgroundColor: this.props.bgColor}]} elevation={5}>
+                    <Icon name={this.props.iconName} color="#fff" size={25} style={styles.icon} />
                 </View>
-            </TouchableNativeFeedback>
+            </TouchableWithoutFeedback>
         );
     }
 }
@@ -35,3 +35,5 @@ const styles = StyleSheet.create({
 });
 
 export default FloatingActionButton;
+
+
