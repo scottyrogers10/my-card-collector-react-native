@@ -1,13 +1,13 @@
-import getUser from "./user/GetUser";
-import receivedUser from "./user/ReceivedUser";
+import getUserById from "./user/GetUserById";
+import receivedUserById from "./user/ReceivedUserById";
 import pushScreen from "./navigator/PushScreen";
 import popScreen from "./navigator/PopScreen";
-import uploadImage from "./camera/UploadImage";
+import getCardImagePath from "./camera/GetCardImagePath";
 
 export {
-    getUser,
-    receivedUser,
+    getUserById,
+    receivedUserById,
     pushScreen,
     popScreen,
-    uploadImage
+    getCardImagePath
 };

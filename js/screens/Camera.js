@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet, TouchableWithoutFeedback, View } from "react-na
 import { connect, } from "react-redux";
 import NativeCamera from "react-native-camera";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { uploadImage, popScreen } from "../actions";
+import { getCardImagePath, popScreen } from "../actions";
 
 class Camera extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class Camera extends Component {
 
     _takePicture() {
         this.camera.capture().then((data) => {
-            this.props.uploadImage(data.path);
+            this.props.getCardImagePath(data.path);
             this.props.popScreen()
         }).catch(err =>  {
             console.error(err);
@@ -68,7 +68,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     popScreen,
-    uploadImage
+    getCardImagePath
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Camera);

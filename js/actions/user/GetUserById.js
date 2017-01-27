@@ -1,8 +1,8 @@
 import * as ActionTypes from "../types";
 
-export default function getUser(userId) {
+export default function getUserById(userId) {
   return {
-    type: ActionTypes.GET_USER,
+    type: ActionTypes.GET_USER_BY_ID,
     payload: {
         userId
     }

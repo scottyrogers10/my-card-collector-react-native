@@ -16,23 +16,23 @@ class AddCard extends Component {
             number: ""
         }
 
-        this._backButtonPress = this._backButtonPress.bind(this);
+        this._backArrowPressed = this._backArrowPressed.bind(this);
     }
 
-    _backButtonPress() {
+    _backArrowPressed() {
         this.props.popScreen();
     }
 
     render() {
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, backgroundColor: "#fff" }}>
                 <Icon.ToolbarAndroid
                     style={styles.toolbar}
                     title="Add Card"
                     titleColor="#424242"
                     navIconName="arrow-back"
                     elevation={5}
-                    onIconClicked={this._backButtonPress}
+                    onIconClicked={this._backArrowPressed}
                     />
 
                 <View style={styles.inputsContainer}>
@@ -76,10 +76,10 @@ class AddCard extends Component {
                         value={this.state.number}
                         />
                 </View>
-                
-                <Text>File Location: {this.props.uploadedImage}</Text>
 
-                <FloatingActionButton bgColor="#1e88e5" iconName="photo-camera" onPress={() => this.props.pushScreen({key: "camera"})} />
+                <Image style={{ height: 100, width: 100, alignSelf: "center" }} source={{ uri: this.props.cardImagePath }} resizeMode="center" />
+
+                <FloatingActionButton bgColor="#1e88e5" iconName="photo-camera" onPress={() => this.props.pushScreen({ key: "camera" })} />
             </View>
         );
     }
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         user: state.user,
-        uploadedImage: state.uploadedImage
+        cardImagePath: state.cardImagePath
     };
 };
 

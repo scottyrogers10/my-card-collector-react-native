@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, TouchableNativeFeedback } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { ipAddress } from "../../EnvironmentVariables";
 
 const DrawerContent = ({ user, closeDrawer, pushToScreen }) => {
     return (
@@ -8,7 +9,7 @@ const DrawerContent = ({ user, closeDrawer, pushToScreen }) => {
             <View style={styles.header}>
                 <Image
                     style={styles.profileImage}
-                    source={user.profileImage} />
+                    source={{ uri: `${ipAddress}/api/users/profileImages?id=${user.profileImageId}` }} />
                 <Text style={styles.username}>{user.username}</Text>
                 <TouchableOpacity style={styles.backButton} onPress={closeDrawer}>
                     <Icon
@@ -18,18 +19,18 @@ const DrawerContent = ({ user, closeDrawer, pushToScreen }) => {
                 </TouchableOpacity >
             </View>
 
-            <TouchableNativeFeedback onPress={() => pushToScreen({key: "profile"})}>
-                    <View style={styles.route}>
-                        <Icon
-                            style={styles.routeIcon}
-                            name="person"
-                            size={24} />
-                        <Text style={styles.routeLabel}>Profile</Text>
-                    </View>
-                </TouchableNativeFeedback>
+            <TouchableNativeFeedback onPress={() => pushToScreen({ key: "profile" })}>
+                <View style={styles.route}>
+                    <Icon
+                        style={styles.routeIcon}
+                        name="person"
+                        size={24} />
+                    <Text style={styles.routeLabel}>Profile</Text>
+                </View>
+            </TouchableNativeFeedback>
 
             <View style={styles.routesContainer}>
-                <TouchableNativeFeedback onPress={() => pushToScreen({key: "my-albums"})}>
+                <TouchableNativeFeedback onPress={() => pushToScreen({ key: "my-albums" })}>
                     <View style={styles.route}>
                         <Icon
                             style={styles.routeIcon}
@@ -39,7 +40,7 @@ const DrawerContent = ({ user, closeDrawer, pushToScreen }) => {
                     </View>
                 </TouchableNativeFeedback>
 
-                <TouchableNativeFeedback onPress={() => pushToScreen({key: "settings"})}>
+                <TouchableNativeFeedback onPress={() => pushToScreen({ key: "settings" })}>
                     <View style={styles.route}>
                         <Icon
                             style={styles.routeIcon}

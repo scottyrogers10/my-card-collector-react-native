@@ -35,6 +35,9 @@ local.properties
 node_modules/
 npm-debug.log
 
+server/configs/environment
+js/EnvironmentVariables.js
+
 # BUCK
 buck-out/
 \.buckd/

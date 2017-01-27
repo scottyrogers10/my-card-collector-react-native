@@ -1,8 +1,7 @@
 import React, { Component, } from "react";
 import { View, NavigationExperimental, Easing, StyleSheet, Animated, } from "react-native";
 import { connect, } from "react-redux";
-import { user, } from "./MockApi";
-import { getUser, } from "./actions";
+import { getUserById } from "./actions";
 import Home from "./screens/Home";
 import Profile from "./screens/Profile";
 import MyAlbums from "./screens/MyAlbums";
@@ -27,7 +26,7 @@ class Main extends Component {
     }
 
     componentWillMount() {
-        this.props.getUser(0);
+        this.props.getUserById("588a69eaaaf1700994647df0");
     }
 
     _render(transitionProps) {
@@ -103,12 +102,12 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        navigator: state.navigator,
+        navigator: state.navigator
     };
 };
 
 const mapDispatchToProps = {
-    getUser,
+    getUserById
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

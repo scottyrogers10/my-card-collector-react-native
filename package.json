@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "start-server": "babel-node ./server/server.js",
+    "init-server": "babel-node ./server/Server.js",
     "test": "jest"
   },
   "dependencies": {
     "babel-cli": "^6.22.2",
-    "body-parser": "^1.16.0",
+    "busboy": "^0.2.14",
     "express": "^4.14.0",
+    "gridfs-stream": "^1.1.1",
     "mongoose": "^4.7.7",
     "passport": "^0.3.2",
     "react": "~15.4.0-rc.4",
@@ -21,7 +22,8 @@
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-observable": "^0.13.0",
-    "rxjs": "^5.0.3"
+    "rxjs": "^5.0.3",
+    "sharp": "^0.17.1"
   },
   "devDependencies": {
     "babel-jest": "18.0.0",

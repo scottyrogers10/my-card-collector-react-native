@@ -7,10 +7,10 @@ import { popScreen } from "../actions";
 class Profile extends Component {
     constructor(props) {
         super(props);
-        this.backButtonPress = this.backButtonPress.bind(this);
+        this._backArrowPressed = this._backArrowPressed.bind(this);
     }
 
-    backButtonPress() {
+    _backArrowPressed() {
         this.props.popScreen();
     }
 
@@ -23,7 +23,7 @@ class Profile extends Component {
                     titleColor="#424242"
                     navIconName="arrow-back"
                     elevation={5}
-                    onIconClicked={this.backButtonPress}
+                    onIconClicked={this._backArrowPressed}
                     />
             </View>
         );

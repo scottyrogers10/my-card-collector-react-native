@@ -1,6 +1,6 @@
 import { combineEpics } from "redux-observable";
-import getUser from "./user/GetUser";
+import getUserById from "./user/GetUserById";
 
 export default combineEpics(
-    getUser
+    getUserById
 );

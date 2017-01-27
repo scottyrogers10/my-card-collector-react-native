@@ -8,10 +8,10 @@ class MyAlbums extends Component {
     constructor(props) {
         super(props);
 
-        this._backButtonPress = this._backButtonPress.bind(this);
+        this._backArrowPressed = this._backArrowPressed.bind(this);
     }
 
-    _backButtonPress() {
+    _backArrowPressed() {
         this.props.popScreen();
     }
 
@@ -24,7 +24,7 @@ class MyAlbums extends Component {
                     titleColor="#424242"
                     navIconName="arrow-back"
                     elevation={5}
-                    onIconClicked={this._backButtonPress}
+                    onIconClicked={this._backArrowPressed}
                     />
             </View>
         );

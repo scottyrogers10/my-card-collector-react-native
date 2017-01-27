@@ -1,4 +1,4 @@
 import { init, start } from "./configs/app";
 
-init();
+init("development");
 start();
