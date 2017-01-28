@@ -15,7 +15,7 @@ class Camera extends Component {
         this.camera.capture().then((data) => {
             this.props.getCardImagePath(data.path);
             this.props.popScreen()
-        }).catch(err =>  {
+        }).catch(err => {
             console.error(err);
         });
     }
@@ -23,7 +23,12 @@ class Camera extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <NativeCamera ref={(cameraElement) => this.camera = cameraElement} style={styles.preview} aspect={NativeCamera.constants.Aspect.fill} captureTarget={NativeCamera.constants.CaptureTarget.disk}>
+                <NativeCamera
+                    ref={(cameraElement) => this.camera = cameraElement}
+                    style={styles.preview}
+                    aspect={NativeCamera.constants.Aspect.fill}
+                    captureTarget={NativeCamera.constants.CaptureTarget.disk}
+                    defaultOnFocusComponent={true}>
                     <TouchableWithoutFeedback style={styles.captureBtn} onPress={this._takePicture}>
                         <View style={styles.captureBtn} elevation={5}>
                             <Icon name="photo-camera" color="#646464" size={27} style={styles.icon} />

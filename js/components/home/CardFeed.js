@@ -2,10 +2,10 @@ import React from "react";
 import { View, Text, StyleSheet, ListView, RecyclerViewBackedScrollView } from "react-native";
 import CardFeedItem from "./CardFeedItem";
 
-const CardFeed = ({ dataSource, user }) => {
+const CardFeed = ({ dataSource }) => {
     const renderRow = (data) => {
         return (
-            <CardFeedItem data={data} user={user} />
+            <CardFeedItem data={data} />
         );
     };
 
@@ -14,6 +14,8 @@ const CardFeed = ({ dataSource, user }) => {
             style={styles.listView}
             dataSource={dataSource}
             renderRow={renderRow}
+            onEndReachedThreshold={5000}
+            onEndReached={() => console.log("End Reached!")}
             renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
             />
     );
